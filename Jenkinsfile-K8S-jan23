@@ -44,7 +44,7 @@ pipeline {
                    "files": [
                       {
                       "pattern": "*.jar",
-                      "target": "manoj-jfrog-libs-snapshot-local/"
+                      "target": "engineering-libs-snapshot-local"
                       }
                             ]
                            }''',
