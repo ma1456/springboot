@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+	    maven "3.9.1"
+	 	}
 
     environment {
         registry = "873473054542.dkr.ecr.ap-northeast-1.amazonaws.com/my-docker-repo"
@@ -14,7 +17,7 @@ pipeline {
         
         stage ("build Jar") {
             steps {
-                sh "clean install"
+                sh "mvn clean install"
             }
         }
         
