@@ -56,11 +56,11 @@ pipeline {
             steps {
                 rtPublishBuildInfo (
                     serverId: "Artifactory"
-                )
+                 )
+                }
             }
-        }
-    }   
-      stage ("Build image") {
+        }   
+        stage ("Build image") {
           steps {
                 script {
                   sh 'docker build -t my-docker-repo .'
@@ -68,7 +68,7 @@ pipeline {
             }
         }
         
-      stage ("Push to ECR") {
+        stage ("Push to ECR") {
            steps {
                 sh "aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 873473054542.dkr.ecr.ap-northeast-1.amazonaws.com"
 		sh "docker tag my-docker-repo:latest 873473054542.dkr.ecr.ap-northeast-1.amazonaws.com/my-docker-repo:latest"
