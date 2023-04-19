@@ -32,8 +32,8 @@ pipeline {
              steps {
                 withCredentials([string(credentialsId: 'JFrog_ID', variable: 'Artifactory')]) {
 		sh "docker login https://manoj123.jfrog.io/"
-		sh "docker tag my-docker-repo:latest manoj123.jfrog.io/docker-pipeline-dev/mydocker:v1"
-		sh "docker push manoj123.jfrog.io/docker-pipeline-dev/mydocker:v1"
+		sh "docker tag my-docker-repo:latest manoj123.jfrog.io/docker-pipeline-prod/mydocker:v1"
+		sh "docker push manoj123.jfrog.io/docker-pipeline-prod/mydocker:v1"
               }  
              }
           }
