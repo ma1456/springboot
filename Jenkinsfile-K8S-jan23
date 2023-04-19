@@ -14,50 +14,12 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ma1456/springboot.git']])
             }
         }
-    /*    stage ("build Jar") {
+       stage ("build Jar") {
             steps {
                 sh "mvn clean install"
             }
-        } */
-	stage ('Package'){
-            steps {
-                sh 'mvn package'
-             }
-        }
-	stage ('Server'){
-            steps {
-               rtServer (
-                 id: "Artifactory",
-                 url: 'http://manoj1.jfrog.io/artifactory',
-                 username: 'manojvarma',
-                  password: 'Polo@1234',
-                  bypassProxy: true,
-                   timeout: 300
-                        )
-            }
-        }
-        stage('Upload'){
-            steps{
-                rtUpload (
-                 serverId:"Artifactory" ,
-                  spec: '''{
-                   "files": [
-                      {
-                      "pattern": "*.jar",
-                      "target": "affinity-libs-snapshot-local/"
-                      }
-                            ]
-                           }''',
-                        )
-               }
-        }
-        stage ('Publish build info') {
-            steps {
-                rtPublishBuildInfo (
-                    serverId: "Artifactory"
-                 )
-                }
-            }
+        } 
+	
         stage ("Build image") {
              steps {
                 script {
@@ -67,9 +29,10 @@ pipeline {
 	   }       
         stage ("Push to ECR") {
              steps {
-                sh "aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 873473054542.dkr.ecr.ap-northeast-1.amazonaws.com"
-		sh "docker tag my-docker-repo:latest 873473054542.dkr.ecr.ap-northeast-1.amazonaws.com/my-docker-repo:latest"
-                sh "docker push 873473054542.dkr.ecr.ap-northeast-1.amazonaws.com/my-docker-repo:latest"  
+                withCredentials([string(credentialsId: 'JFrog_ID', variable: 'Artifactory')]) {
+		sh "docker tag my-docker-repo:latest manoj123.jfrog.io/docker-trial/mydocker:latest"
+		sh "docker push manoj123.jfrog.io/docker-trial/mydocker:latest"
+              }  
              }
           }
       }
