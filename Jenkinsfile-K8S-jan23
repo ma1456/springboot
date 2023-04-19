@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         registry = "873473054542.dkr.ecr.ap-northeast-1.amazonaws.com/my-docker-repo"
-	JFrog_CREDS = credentials('JFrog_ID')
+	tag = sh(returnStdout: true, script: "git rev-parse --short=10 HEAD").trim()
     }
     
     stages {
@@ -32,8 +32,8 @@ pipeline {
              steps {
                 withCredentials([string(credentialsId: 'JFrog_ID', variable: 'Artifactory')]) {
 		sh "docker login https://manoj123.jfrog.io/"
-		sh "docker tag my-docker-repo:latest manoj123.jfrog.io/docker-pipeline-prod/mydocker:prod-v1"
-		sh "docker push manoj123.jfrog.io/docker-pipeline-prod/mydocker:prod-v1"
+		sh "docker tag my-docker-repo:latest manoj123.jfrog.io/docker-pipeline-prod/mydocker:prod_$tag"
+		sh "docker push manoj123.jfrog.io/docker-pipeline-prod/mydocker:prod_$tag"
               }  
              }
           }
