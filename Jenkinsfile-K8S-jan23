@@ -6,6 +6,7 @@ pipeline {
 
     environment {
         registry = "873473054542.dkr.ecr.ap-northeast-1.amazonaws.com/my-docker-repo"
+	JFrog_CREDS = credentials('JFrog_ID')
     }
     
     stages {
@@ -30,7 +31,7 @@ pipeline {
         stage ("Push to ECR") {
              steps {
                 withCredentials([string(credentialsId: 'JFrog_ID', variable: 'Artifactory')]) {
-		sh "docker login -u ${JFrog_ID} https://manoj123.jfrog.io/artifactory/docker-trial/"
+		sh "docker login -u ${JFrog_CREDS} https://manoj123.jfrog.io/artifactory/docker-trial/"
 		sh "docker tag my-docker-repo:latest manoj123.jfrog.io/docker-trial/mydocker:latest"
 		sh "docker push manoj123.jfrog.io/docker-trial/mydocker:latest"
               }  
