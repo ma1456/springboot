@@ -28,7 +28,7 @@ pipeline {
                 }
              }
 	   }       
-        stage ("Push to ECR") {
+        stage ("Push to JFrog") {
              steps {
                 withCredentials([string(credentialsId: 'JFrog_ID', variable: 'Artifactory')]) {
 		sh "docker login https://manoj123.jfrog.io/"
