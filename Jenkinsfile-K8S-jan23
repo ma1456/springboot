@@ -20,23 +20,6 @@ pipeline {
                 sh "mvn clean package"
             }
         } 
-	
-      */  stage ("Build image") {
-             steps {
-                script {
-                  sh 'docker build -t my-docker-repo .'
-                }
-             }
-	   }       
-        stage ("Push to ECR") {
-             steps {
-                withCredentials([string(credentialsId: 'JFrog_ID', variable: 'Artifactory')]) {
-		sh "docker login https://manoj123.jfrog.io/"
-		sh "docker tag my-docker-repo:latest manoj123.jfrog.io/docker-pipeline-dev/mydocker:v1"
-		sh "docker push manoj123.jfrog.io/docker-pipeline-dev/mydocker:v1"
-              }  
-             }
-          } /*
       } 
   }
 
