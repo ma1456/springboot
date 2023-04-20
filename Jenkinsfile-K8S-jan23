@@ -1,19 +1,16 @@
 pipeline {
     agent any
-    tools {
-	    maven "3.9.1"
-	 	}
     stages {
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ma1456/springboot.git']])
             }
         }
-       stage ("build Jar") {
-            steps {
-                sh "mvn clean package"
-            }
-        } 
+       stage('build') { 
+       withMaven(jdk: 'java', maven: 'maven') { 
+       println "build is running" 
+       sh "mvn clean package" 
+       } }
       } 
   }
 
