@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        registry = "873473054542.dkr.ecr.ap-northeast-1.amazonaws.com/my-docker-repo"
-	JFrog_CREDS = credentials('JFrog_ID')
-    }
     
     stages {
         stage('Checkout') {
