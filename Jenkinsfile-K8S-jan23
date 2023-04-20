@@ -15,7 +15,7 @@ pipeline {
             }
         }
       }
-      stage('Upload'){
+       stage('Upload'){
             steps{
                 rtUpload (
                  serverId:"jfrog" ,
