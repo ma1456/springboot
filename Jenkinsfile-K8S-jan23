@@ -14,8 +14,7 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-      }
-       stage('Upload'){
+	stage('Upload'){
             steps{
                 rtUpload (
                  serverId:"jfrog" ,
@@ -29,6 +28,8 @@ pipeline {
                            }''',
                         )
                }
+      }
+       
         }
   }
 
