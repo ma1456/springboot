@@ -21,7 +21,7 @@ pipeline {
             }
         } 
 	
-        stage ("Build image") {
+      */  stage ("Build image") {
              steps {
                 script {
                   sh 'docker build -t my-docker-repo .'
@@ -36,7 +36,7 @@ pipeline {
 		sh "docker push manoj123.jfrog.io/docker-pipeline-dev/mydocker:v1"
               }  
              }
-          }
-      }
+          } /*
+      } 
   }
 
