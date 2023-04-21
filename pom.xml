@@ -33,7 +33,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
- 
+	 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -50,5 +50,16 @@
         </plugins>
 	<finalName>springbootApp</finalName>
     </build>
- 
+ <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>a0c8sftjswlub-artifactory-primary-0-releases</name>
+        <url>https://manoj123.jfrog.io/artifactory/maven-local-repo</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>a0c8sftjswlub-artifactory-primary-0-snapshots</name>
+        <url>https://manoj123.jfrog.io/artifactory/maven-local-repo</url>
+    </snapshotRepository>
+</distributionManagement>
 </project>
