@@ -22,7 +22,6 @@ pipeline {
                    "files": [
                       {
                       "pattern": "*.jar",
-		      "pattern": "*.pom",
                       "target": "testing/"
                       }
                             ]
