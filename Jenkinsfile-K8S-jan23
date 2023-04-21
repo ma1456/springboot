@@ -23,7 +23,7 @@ pipeline {
                       {
                       "pattern": "*.jar",
 		      "pattern": "*.pom",
-                      "target": "maven-local-repo/"
+                      "target": "testing/"
                       }
                             ]
                            }''',
